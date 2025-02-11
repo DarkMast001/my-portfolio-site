@@ -1,0 +1,101 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'); /* Montserrat */
+/* font-family: "Montserrat", serif; */
+
+.header {
+	height: 76px;
+	width: 100%;
+	background-color: #F7F2EA;
+	display: flex;
+	justify-content: center;
+	font-family: "Montserrat", serif;
+}
+
+.header_container_wide {
+	width: 1334px;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+
+.anim_text_container {
+	font-weight: 400;
+	font-size: 28px;
+}
+
+.cursor_wide {
+	display: inline-block;
+	margin-left: 2px;
+	animation: blink 0.7s infinite;
+}
+
+.cursor_narrow {
+	display: inline-block;
+	margin-left: 2px;
+	animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+	0%, 50% {
+	  opacity: 1;
+	}
+	51%, 100% {
+	  opacity: 0;
+	}
+}
+
+.about_me_link, .skills_link, .projects_link {
+	all: unset;
+	font-weight: 400;
+	font-size: 28px;
+	white-space: nowrap;
+}
+
+.inner_links_group {
+	display: flex;
+	gap: 85px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.outer_links_group {
+	display: flex;
+	gap: 20px;
+}
+
+.header_container_narrow {
+	width: 100%;
+	margin-left: 30px;
+	margin-right: 30px;
+	display: none;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+}
+
+@media (max-width: 1400px) {
+	.header_container_wide {
+		width: 100%;
+		margin-left: 30px;
+		margin-right: 30px;
+	}
+}
+
+@media (max-width: 1000px) {
+	.header_container_wide {
+		display: none;
+	}
+
+	.header_container_narrow {
+		display: flex;
+	}
+
+	.anim_text_container {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
