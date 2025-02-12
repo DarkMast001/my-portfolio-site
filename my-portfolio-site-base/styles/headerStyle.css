@@ -11,6 +11,58 @@
 	font-family: "Montserrat", serif;
 }
 
+.header_container_narrow {
+	width: 100%;
+	margin-left: 30px;
+	margin-right: 30px;
+	display: none;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+}
+
+.burger_menu {
+	position: relative;
+	z-index: 900;
+}
+
+.burger_icon_text_group {
+	font-weight: 500;
+	font-size: 28px;
+	color: #fff;
+	z-index: 950;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 68px;
+	left: 96px;
+	top: 86px;
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 1s ease, visibility 1s ease;
+}
+
+.burger_icon_text_group.hidden {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0s ease, visibility 0s ease;
+} 
+
+.burger_icon_text_group a {
+	all: unset;
+	cursor: pointer;
+}
+
+.burger_icon {
+	transition: transform 0.3s ease;
+	transform-origin: top left;
+}
+
+.burger_icon.activate {
+	transform: scale(9);
+}
+
 .header_container_wide {
 	width: 1334px;
 	height: 100%;
@@ -51,6 +103,7 @@
 	font-weight: 400;
 	font-size: 28px;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 .inner_links_group {
@@ -64,16 +117,6 @@
 .outer_links_group {
 	display: flex;
 	gap: 20px;
-}
-
-.header_container_narrow {
-	width: 100%;
-	margin-left: 30px;
-	margin-right: 30px;
-	display: none;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
 }
 
 @media (max-width: 1400px) {
@@ -97,5 +140,60 @@
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
+	}
+}
+
+@media (max-width: 600px) {
+	.header {
+		height: 70px;
+	}
+
+	.burger_icon.activate {
+		transform: scale(7) translateY(1.5px);
+	}
+
+	.burger_icon_text_group {
+		font-size: 24px;
+		gap: 50px;
+		left: 65px;
+		top: 76px;
+	}
+
+	.anim_text_container {
+		font-size: 24px;
+	}
+	
+	.outer_links_group {
+		gap: 10px;
+	}
+
+	.gh_icon, .tg_icon, .vk_icon {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+@media (max-width: 500px) {
+	.header_container_narrow {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+}
+
+@media (max-width: 450px) {
+	.anim_text_container {
+		left: auto;
+		right: 10px;
+		transform: none;
+	}
+
+	.outer_links_group {
+		display: none;
+	}
+}
+
+@media (hover: hover) {
+	.about_me_link:hover, .skills_link:hover, .projects_link:hover, .burger_link:hover {
+		color: #776f6f;
 	}
 }
