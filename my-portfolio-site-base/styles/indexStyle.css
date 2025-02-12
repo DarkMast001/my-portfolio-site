@@ -1,0 +1,59 @@
+.main {
+	width: 100%;
+	margin-block-start: 42px;
+	margin-block-end: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.about_me_section {
+	width: 1334px;
+	display: flex;
+	box-sizing: border-box;
+}
+
+.photo_and_text {
+	display: flex;
+	gap: 77px;
+}
+
+.photo_container {
+	width: 346px;
+	height: 339px;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+.photo_container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	scale: 1.2;
+}
+
+.text_container {
+	font-family: "Montserrat", serif;
+	font-weight: 400;
+	font-size: 24px;
+	text-align: justify;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.text_container p {
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+}
+
+@media (max-width: 1400px) {
+	.about_me_section {
+		width: 100%;
+		padding-left: 30px;
+		padding-right: 30px;
+		/* margin-left: 30px;
+		margin-right: 30px; */
+	}
+}

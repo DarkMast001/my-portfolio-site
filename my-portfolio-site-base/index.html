@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="styles/headerStyle.css">
+	<link rel="stylesheet" href="styles/indexStyle.css">
 	<link rel="shortcut icon" href="images/main_icon.ico" type="image/x-icon">
 	<title>Портфолио</title>
 </head>
@@ -12,7 +13,7 @@
 		<div class="header_container_narrow">
 			<div class="burger_menu">
 				<div class="burger_icon_text_group hidden">
-					<a href="#" class="burger_link">О себе</a>
+					<a href="#about-me" class="burger_link">О себе</a>
 					<a href="#" class="burger_link">Навыки</a>
 					<a href="#" class="burger_link">Проекты</a>
 				</div>
@@ -65,7 +66,7 @@
 				<span class="cursor_wide">_</span>
 			</div>
 			<div class="inner_links_group">
-				<a href="#" class="about_me_link">О себе</a>
+				<a href="#about-me" class="about_me_link">О себе</a>
 				<a href="#" class="skills_link">Навыки</a>
 				<a href="#" class="projects_link">Проекты</a>
 			</div>
@@ -104,12 +105,31 @@
 		</div>
 	</header>
 
-	<main>
-		
+	<main class="main">
+		<section class="about_me_section" id="about-me">
+			<div class="photo_and_text">
+				<div class="photo_container">
+					<img src="images/my_photo.jpg" alt="моя фотография">
+				</div>
+				<div class="text_container">
+					<p>Меня зовут Подставкин Дмитрий, я студент третьего курса НИЯУ МИФИ по программе «Применение и эксплуатация автоматизированных систем специального назначения». </p>
+					<br>
+					<p>Этот сайт создан как мое резюме и портфолио, где я представляю свои навыки и опыт. Здесь вы найдёте проекты, выполненные мной лично, а также командные работы, в которых я принимал участие.</p>
+					<br>
+					<p>В настоящее время я специализируюсь на frontend-разработке, изучаю современные технологии создания веб-интерфейсов и разрабатываю пользовательские интерфейсы.</p>
+				</div>
+			</div>
+			<div>
+
+			</div>
+		</section>
+		<section></section>
+		<section></section>
 	</main>
 
 	<footer></footer>
 
-	<script type="module" src="scripts/index.js"></script>
+	<script type="module" src="scripts/header/header.js"></script>
+	<script src="scripts/index.js"></script>
 </body>
 </html>
