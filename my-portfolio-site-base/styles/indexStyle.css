@@ -7,9 +7,14 @@
 	align-items: center;
 }
 
+/*========================*/
+/*====ABOUT ME SECTION====*/
+/*========================*/
+
 .about_me_section {
 	width: 1334px;
 	min-height: 339px;
+	margin-block-end: 100px;
 	display: flex;
 	flex-direction: column;
 	gap: 30px;
@@ -54,6 +59,7 @@
 	text-align: justify;
 	margin-block-start: 0px;
 	margin-block-end: 0px;
+	line-height: 29px;
 }
 
 @media (max-width: 1400px) {
@@ -90,4 +96,140 @@
 	.my_text {
 		font-size: 20px;
 	}
+}
+
+/*========================*/
+/*=====SKILLS SECTION=====*/
+/*========================*/
+
+.skills_section {
+	width: 1334px;
+	font-family: "Montserrat", serif;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-block-end: 100px;
+}
+
+.section_header {
+	position: relative;
+}
+
+.section_header span {
+	font-weight: 400;
+	font-size: 32px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 10px;
+	line-height: 29px;
+}
+
+.skills_section p {
+	font-weight: 400;
+	font-size: 24px;
+	text-align: justify;
+	margin-block-start: 45px;
+	margin-block-end: 45px;
+}
+
+.skills_group {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 55px;
+	row-gap: 40px;
+}
+
+.skill_card {
+	font-family: "Montserrat", serif;
+	width: 408px;
+	height: 490px;
+	border-radius: 20px;
+	background: #f7f2ea;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	box-sizing: border-box;
+	transition: height 1s ease;
+}
+
+.card_header {
+	display: flex;
+	align-items: center;
+	gap: 35px;
+}
+
+.card_header span {
+	font-weight: 400;
+	font-size: 40px;
+}
+
+.card_level span {
+	font-weight: 400;
+	font-size: 24px;
+	text-align: center;
+}
+
+.card_decription {
+	height: 231px;
+	overflow: hidden;
+	transition: height 1s ease;
+}
+
+.card_decription span {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 29px;
+}
+
+.card_button {
+	width: 182px;
+	height: 41px;
+	border-radius: 7px;
+	background: #eadac1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.card_button_arrow {
+	transform: rotate(0deg);
+	transition: transform 1s ease;
+}
+
+.card_button:active {
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
+}
+
+.skill_card.unwrap {
+	height: 693px;
+}
+
+.card_decription.unwrap {
+	height: 434px;
+}
+
+.card_button_arrow.unwrap {
+	transform: rotate(180deg);
+}
+
+@media (hover: hover) {
+	.card_button:hover {
+		background: #d1c3ad;
+	}
+}
+
+@media (max-width: 1400px) {
+	.skills_section {
+		width: 100%;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+
+@media (max-width: 1000px) {
+	
 }
