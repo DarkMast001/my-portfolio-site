@@ -8,15 +8,19 @@ const cursorElementNarrow = document.querySelector(".cursor_narrow");
 const burgerIcon = document.querySelector(".burger_icon");
 const burgerIconText = document.querySelector(".burger_icon_text_group");
 
+const overlay = document.getElementById("overlay");
+
 const showAndHideMenu = () => {
 	burgerIcon.classList.toggle("activate");
 	burgerIconText.classList.toggle("hidden");
+	overlay.classList.toggle("hidden");
 }
 
 const hideBurgerMenu = () => {
 	if (burgerIcon.classList.contains("activate")){
 		burgerIconText.classList.add("hidden");
 		burgerIcon.classList.remove("activate");
+		overlay.classList.add("hidden");
 	}
 }
 
