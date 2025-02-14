@@ -126,6 +126,10 @@
 	line-height: 29px;
 }
 
+.desktop_1000, .mobile_800, .mobile_600, .mobile_450, .mobile_330  {
+	display: none;
+}
+
 .skills_section p {
 	font-weight: 400;
 	font-size: 24px;
@@ -136,6 +140,7 @@
 
 .skills_group {
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
 	column-gap: 55px;
 	row-gap: 40px;
@@ -231,5 +236,103 @@
 }
 
 @media (max-width: 1000px) {
+	.desktop_1600 {
+		display: none;
+	}
+
+	.desktop_1000 {
+		display: block;
+	}
+
+	.skills_section p {
+		font-size: 20px;
+	}
+
+	.skill_card {
+		width: 398px;
+	}
+
+	.skill_card.unwrap {
+		height: 600px;
+	}
 	
+	.card_decription.unwrap {
+		height: 341px;
+	}
+
+	.card_header span {
+		font-size: 36px;
+	}
+
+	.card_level span {
+		font-size: 20px;
+	}
+
+	.card_decription span {
+		font-size: 20px;
+	}
+
+	.card_header {
+		gap: 25px;
+	}
+
+	.card_header svg {
+		width: 80px;
+		height: 80px;
+	}
+}
+
+@media (max-width: 800px) {
+	.desktop_1000 {
+		display: none;
+	}
+
+	.mobile_800 {
+		display: block;
+	}
+}
+
+@media (max-width: 600px) {
+	.section_header span {
+		font-size: 28px;
+	}
+
+	.mobile_800 {
+		display: none;
+	}
+
+	.mobile_600 {
+		display: block;
+	}
+}
+
+@media (max-width: 500px) {
+	.mobile_600 {
+		display: none;
+	}
+
+	.mobile_450 {
+		display: block;
+	}
+
+	.skill_card {
+		width: 350px;
+		height: 380px;
+	}
+
+	.card_header svg {
+		width: 50px;
+		height: 50px;
+	}
+
+	.card_header span {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 400px) {
+	.skill_card {
+		width: 300px;
+		height: 320px;
+	}
 }
