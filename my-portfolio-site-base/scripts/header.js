@@ -1,4 +1,4 @@
-import { typeTextAnimation } from "./animationHeaderTextScript.js";
+const header = document.querySelector(".header");
 
 const typedTextElementWide = document.getElementById("typed-text-wide");
 const cursorElementWide = document.querySelector(".cursor_wide");
@@ -24,16 +24,39 @@ const hideBurgerMenu = () => {
 	}
 }
 
+const typeTextAnimation = (text, typedTextElement, cursorElement) => {
+    let index = 0;
+
+    function type() {
+        if (index < text.length) {
+            typedTextElement.textContent += text[index];
+            index++;
+            if (index > 0 && index <= 1)
+                setTimeout(type, 400);
+            else if (index > 1 && index <= 4)
+                setTimeout(type, 200);
+            else
+                setTimeout(type, 400);
+        } else {
+            cursorElement.style.display = "none";
+        }
+    }
+
+    type();
+}
+
 const playHeaderAnimation = () => {
+    const word = header.getAttribute("data-page");
+
 	if (typedTextElementWide != null && cursorElementWide != null){
 		setTimeout(() => {
-			typeTextAnimation("<Home/>", typedTextElementWide, cursorElementWide);
+			typeTextAnimation(word, typedTextElementWide, cursorElementWide);
 		}, 2000);
 	}
 	
 	if (typedTextElementNarrow != null && cursorElementNarrow != null){
 		setTimeout(() => {
-			typeTextAnimation("<Home/>", typedTextElementNarrow, cursorElementNarrow);
+			typeTextAnimation(word, typedTextElementNarrow, cursorElementNarrow);
 		}, 2000);
 	}
 }
