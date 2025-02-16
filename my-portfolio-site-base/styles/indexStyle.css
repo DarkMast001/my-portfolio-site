@@ -384,7 +384,6 @@
 	grid-template-rows: 1fr 1fr 1fr;
 	gap: 40px 55px;
 	width: 100%;
-	height: 1175px;
 }
 
 .item1, .item2, .item3, .item4, .item5, .item6 {
@@ -395,42 +394,37 @@
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
+	background-color: #f7f2ea;
 }
 
 .item1 {
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
-	background-color: #f7f2ea;
 }
 
 .item2 {
     grid-column: 3 / 4;
     grid-row: 1 / 3;
-    background-color: #f7f2ea;
 }
 
 .item3 {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
-    background-color: #f7f2ea;
 }
 
 .item4 {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    background-color: #f7f2ea;
 }
 
 .item5 {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
-    background-color: #f7f2ea;
 }
 
 .item6 {
     grid-column: 2 / 4;
     grid-row: 3 / 4;
-    background-color: #f7f2ea;
 }
 
 .hover_overlay {
@@ -495,4 +489,103 @@
 
 .technology_project span span {
 	font-weight: 600;
+}
+
+@media (max-width: 1460px) {
+	.projects_section {
+		width: 100%;
+		padding-left: 60px;
+		padding-right: 60px;
+	}
+
+	.projects_grid {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: repeat(5, 1fr);
+	}
+	
+	.item1 {
+		grid-column: 1 / 3;
+		grid-row: 1 / 2;
+	}
+	
+	.item2 {
+		grid-column: 2 / 3;
+		grid-row: 2 / 4;
+	}
+	
+	.item3 {
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+	}
+	
+	.item4 {
+		grid-column: 1 / 2;
+		grid-row: 3 / 4;
+	}
+	
+	.item5 {
+		grid-column: 1 / 2;
+		grid-row: 5 / 6;
+	}
+	
+	.item6 {
+		grid-column: 1 / 3;
+		grid-row: 4 / 5;
+	}
+}
+
+@media (max-width: 1000px) {
+	.header_project {
+		font-size: 28px;
+	}
+
+	.description_project, .technology_project {
+		font-size: 20px;
+	}
+}
+
+@media (max-width: 800px) {
+	.projects_section {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	.projects_grid {
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(6, 1fr);
+	}
+
+	.hover_overlay {
+		display: none;
+	}
+
+	.item1 {
+		grid-column: 1 / 2;
+		grid-row: 1 / 2;
+	}
+	
+	.item2 {
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+	}
+	
+	.item3 {
+		grid-column: 1 / 2;
+		grid-row: 3 / 4;
+	}
+	
+	.item4 {
+		grid-column: 1 / 2;
+		grid-row: 4 / 5;
+	}
+	
+	.item5 {
+		grid-column: 1 / 2;
+		grid-row: 6 / 7;
+	}
+	
+	.item6 {
+		grid-column: 1 / 2;
+		grid-row: 5 / 6;
+	}
 }

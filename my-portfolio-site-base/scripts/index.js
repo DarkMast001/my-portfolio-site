@@ -7,8 +7,8 @@ buttons.forEach(button => {
         const description = card.querySelector(".card_decription");
         const arrow = card.querySelector(".card_button_arrow");
 
-		card.classList.toggle("unwrap")
-        description.classList.toggle("unwrap");
+        card.classList.toggle("unwrap")
+        escription.classList.toggle("unwrap");
         arrow.classList.toggle("unwrap");
     });
 });
