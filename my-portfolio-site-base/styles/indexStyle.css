@@ -349,6 +349,10 @@
 		height: 335px;
 	}
 
+	.skill_card.unwrap {
+		height: 640px;
+	}
+
 	.card_decription {
 		height: 120px;
 	}
