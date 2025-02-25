@@ -284,9 +284,10 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default: <br>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await HandleUnknownCommand(botClient, message); <br>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
 									&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+									} <br>
 						</code>
+						<br>
 						Реализации функций обработчиков каждой из команд: <br>
 						<code class="code">
 							private static async Task HandleStartCommand(ITelegramBotClient botClient, Message message)  <br>
@@ -307,6 +308,7 @@
 								&nbsp;&nbsp;&nbsp;&nbsp;await botClient.SendTextMessageAsync(message.Chat.Id, "Неизвестная команда"); <br>
 							} <br>
 						</code>
+						<br>
 					</p>
 					<p class="p">
 						В главной функции <code class="code">Update</code>, как только пользователь вводит какой-либо текст, мы просто проверяем на каком этапе он находится.
@@ -540,6 +542,7 @@
 							else <br>
 							&nbsp;&nbsp;&nbsp;&nbsp;MessageBox.Show("Такого пользователя нет"); <br>
 						</code>
+						<br>
 					</p>
 				</li>
 				<li style="font-style: oblique;">
@@ -584,6 +587,7 @@
 							} <br>
 						</code>
 						Где <code class="code">scannedProduct</code> это объект класса Product. <br>
+						<br>
 					</p>
 				</li>
 				<li style="font-style: oblique;">
@@ -704,6 +708,7 @@
 						{ <br>
 							MessageBox.Show("Неправильно введён шифр"); } <br>
 					</code>
+					<br>
 				</li>
 				<li style="font-style: oblique;">
 					Сканирование QR-кода.
@@ -775,6 +780,7 @@
 						} <br>
 						db.closeConnection(); <br>
 					</code>
+					<br>
 				</li>
 			</ol>
 		</div>
