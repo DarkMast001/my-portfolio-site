@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="images/Logo_fav.svg" type="image/x-icon">
+	<link rel="stylesheet" href="styles/header.css">
+	<link rel="stylesheet" href="styles/balance.css">
+	<link rel="stylesheet" href="styles/footer.css">
+	<title>Балансировка</title>
+</head>
+<body>
+	<header class="header">
+		<div class="logo_title">
+			<img src="images/Logo.svg" alt="Логотип организации" class="logo_img">
+			<p class="logo_text">CatsLab</p>
+		</div>
+		<div class="nav" id="nav">
+			<a href="#" class="nav_link">Балансировка</a>
+			<a href="molar.html" class="nav_link">Молярная масса</a>
+			<a href="index.html" class="nav_link">О нас</a>
+		</div>
+		<img src="images/icon_list.svg" alt="Кнопка вызова меню" class="menu_icon" id="menu_icon">
+	</header>
+
+	<main class="main">
+		<section class="input_container">
+			<p>Балансировка</p>
+				<form action="" class="input_form">
+					<input type="text" placeholder="Введите уравнение. Например, H20 = H2 + O2" class="input_equation_balance" id="userInput"/>
+					<input type="button" value=">" class="send_btn">
+				</form>
+		</section>
+
+		<section class="result_container">
+
+		</section>
+	</main>
+
+	<footer class="footer">
+		<img src="images/Logo.svg" alt="логотип">
+		<p class="power_by">powered by HTML CSS JavaScript</p>
+		<div>
+			<img src="images/github.svg" alt="ссылка на гитхаб" onclick="window.open('https://github.com/DarkMast001', '_blank')" style="cursor: pointer;">
+			<img src="images/tg.svg" alt="сслыка на телеграм" onclick="window.open('https://t.me/dimon992', '_blank')" style="cursor: pointer;">
+		</div>
+	</footer>
+	<script src="scripts/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="images/Logo_fav.svg" type="image/x-icon">
+	<link rel="stylesheet" href="styles/header.css">
+	<link rel="stylesheet" href="styles/molar.css">
+	<link rel="stylesheet" href="styles/footer.css">
+	<title>Молярная масса</title>
+</head>
+<body>
+	<header class="header">
+		<div class="logo_title">
+			<img src="images/Logo.svg" alt="Логотип организации" class="logo_img">
+			<p class="logo_text">CatsLab</p>
+		</div>
+		<div class="nav" id="nav">
+			<a href="balance.html" class="nav_link">Балансировка</a>
+			<a href="#" class="nav_link">Молярная масса</a>
+			<a href="index.html" class="nav_link">О нас</a>
+		</div>
+		<img src="images/icon_list.svg" alt="Кнопка вызова меню" class="menu_icon" id="menu_icon">
+	</header>
+
+	<main class="main">
+		<section class="input_container">
+			<p>Молярная масса</p>
+				<form action="" class="input_form">
+					<input type="text" placeholder="Введите соединение. Например, H20" class="input_equation_molar" id="userInput"/>
+					<input type="button" value=">" class="send_btn" id="sendButton">
+				</form>
+		</section>
+
+		<section id="result_section">
+			<div class="continer_block">
+				<div class="section_text">
+					<p class="section_text t1">Общая молярная масса</p>
+					<p class="section_text t2">18.015 g/mol</p>
+				</div>
+				<div class="section_text t2 t3">
+					<p>Информация о каждом элементе</p>
+					<ul>
+						<li>
+							H
+							<ul style="list-style-type: disc;">
+								<li>Название: водород</li>
+								<li>Масса в соединении: 2.016 g/mol</li>
+								<li>Количество атомов: 2</li>
+								<li>Процент массы: 11.190%</li>
+							</ul>
+						</li>
+						<li>
+							O
+							<ul style="list-style-type: disc;">
+								<li>Название: кислород</li>
+								<li>Масса в соединении: 15.999 g/mol</li>
+								<li>Количество атомов: 1</li>
+								<li>Процент массы: 88.810%</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<img src="images/Logo.svg" alt="логотип">
+		<p class="power_by">powered by HTML CSS JavaScript</p>
+		<div>
+			<img src="images/github.svg" alt="ссылка на гитхаб" onclick="window.open('https://github.com/DarkMast001', '_blank')" style="cursor: pointer;">
+			<img src="images/tg.svg" alt="сслыка на телеграм" onclick="window.open('https://t.me/dimon992', '_blank')" style="cursor: pointer;">
+		</div>
+	</footer>
+	<script src="scripts/script.js"></script>
+	<script src="scripts/molarLogic.js"></script>
+</body>
+</html>

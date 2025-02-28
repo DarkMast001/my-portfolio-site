@@ -1,0 +1,152 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); /* ROBOTO шрифт */
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.main {
+	flex-grow: 1;
+	width: 78%;
+	display: flex;
+	flex-direction: column;
+}
+
+.input_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-block-start: 100px;
+	margin-block-end: 100px;
+}
+
+.input_container p {
+	font-family: "Roboto", sans-serif;
+	font-size: 32px;
+	font-weight: 300;
+	line-height: 37.5px;
+	color: #443b3b;
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+}
+
+.input_form {
+	display: flex;
+	width: 70%;	
+	height: 38px;
+}
+
+.input_equation_molar {
+	font-family: "Roboto", sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 19px;
+	color: #857878;
+
+	display: block;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	border-radius: 0px;
+	border-width: 1px;
+	border-color: #857878;
+}
+
+.send_btn {
+	font-family: "Roboto", sans-serif;
+	font-size: 32px;
+	font-weight: 300;
+	line-height: 37.5px;
+	color: #857878;
+	display: block;
+	height: 100%;
+	width: 46px;
+	box-sizing: border-box;
+	border-radius: 0px;
+	border-width: 1px;
+	border-color: #857878;
+	background-color: white;
+}
+
+#result_section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+}
+
+.continer_block {
+	width: 70%;
+}
+
+.section_text {
+	font-family: "Roboto", sans-serif;
+}
+
+.section_text.t1 {
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 28px;
+	color: #443b3b;
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+}
+
+.section_text.t2 {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 23px;
+	color: #857878;
+	margin-block-start: 0px;
+	margin-block-end: 30px;
+}
+
+.section_text.t2.t3 {
+	color: #443b3b;
+	margin-block-end: 5px;
+}
+
+@media (max-width: 700px) {
+	.main {
+		width: 100%;
+	}
+}
+
+@media (max-width: 460px) {
+	.input_container {
+		align-items: normal;
+		margin-block-start: 50px;
+		margin-block-end: 50px;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	
+	.input_form {
+		width: 100%;	
+	}
+
+	#result_section {
+		align-items: normal;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	.continer_block {
+		width: 100%;
+	}
+}
+
+@media (min-width: 1600px) {
+	.continer_block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
