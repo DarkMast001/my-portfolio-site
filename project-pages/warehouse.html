@@ -8,6 +8,11 @@
 	<link rel="stylesheet" href="../styles/warehouseStyle.css">
 	<link rel="stylesheet" href="../styles/footerStyle.css">
 	<link rel="shortcut icon" href="../images/general/main_icon.ico" type="image/x-icon">
+	<!-- Подсветка кода -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
 	<title>Система управления складом</title>
 </head>
 
@@ -257,57 +262,59 @@
 						Словарь: <br>
 						<code class="code">private static Dictionary &lt;long, (Activity activity, Product product)&gt; workingUsers;</code> <br>
 						где <code class="code">long</code> - это id пользователя, <br>
-						<code class="code">Activity activity</code> - это enum текущего состояния пользователя: <br>
-						<code class="code">
-							enum Activity <br>
-							{	<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;waitCommand, <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;enterProductName, <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;enterProductDescription, <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;endProductEntery <br>
-							} <br>
-						</code>
+						<code class="code">Activity activity</code> - это enum текущего состояния пользователя:
+<pre><code class="language-csharp">
+enum Activity
+{
+	waitCommand,
+	enterProductName,
+	enterProductDescription,
+	endProductEntery
+}
+</code></pre>
 						<code class="code">Product product</code> - это объект класса <code class="code">Product</code>, в котором есть поля <code class="code">productName</code> и <code class="code">productDescription</code>, которые заполняет пользователь. <br>
 						Функция <code class="code">HandleCommand</code>: <br>
-						<code class="code">
-							public static async Task HandleCommand(ITelegramBotClient botClient, Message message) <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;string command = message.Text.Split(' ')[0]; // Получаем первое слово из текста сообщения, это будет команда <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;switch (command) <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case "/start": <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await HandleStartCommand(botClient, message); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case "/addproduct": <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await HandleAddProductCommand(botClient, message); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default: <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await HandleUnknownCommand(botClient, message); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;} <br>
-									} <br>
-						</code>
-						<br>
+<pre><code class="language-csharp">
+public static async Task HandleCommand(ITelegramBotClient botClient, Message message)
+{
+	tring command = message.Text.Split(' ')[0]; // Получаем первое слово из текста сообщения, это будет команда
+	switch (command)
+	{
+		case "/start":
+			await HandleStartCommand(botClient, message);
+			break;
+		case "/addproduct":
+			await HandleAddProductCommand(botClient, message);
+			break;
+		default:
+			await HandleUnknownCommand(botClient, message);
+			break;
+	}
+}
+</code></pre>
 						Реализации функций обработчиков каждой из команд: <br>
-						<code class="code">
-							private static async Task HandleStartCommand(ITelegramBotClient botClient, Message message)  <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;await botClient.SendTextMessageAsync(message.From.Id, "Здравствуйте! Чтобы сделать QR-код для Вашего товара, воспользуйтесь коммандой >> /addproduct"); <br>
-							} <br>
-							private static async Task HandleAddProductCommand(ITelegramBotClient botClient, Message message) <br>
-							{  <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;await botClient.SendTextMessageAsync(message.Chat.Id, "Введите название товара."); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;workingUsers.Add(message.From.Id, (Activity.enterProductName, new Product())); <br>
-							} <br>
-							private static async Task HandleHelpCommand(ITelegramBotClient botClient, Message message) <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;await botClient.SendTextMessageAsync(message.Chat.Id, "Помощь по работе с командами и ботом"); <br>
-							} <br>
-							private static async Task HandleUnknownCommand(ITelegramBotClient botClient, Message message) <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;await botClient.SendTextMessageAsync(message.Chat.Id, "Неизвестная команда"); <br>
-							} <br>
-						</code>
+<pre><code class="language-csharp">
+private static async Task HandleStartCommand(ITelegramBotClient botClient, Message message)
+{
+	await botClient.SendTextMessageAsync(message.From.Id, "Здравствуйте! Чтобы сделать QR-код для Вашего товара, воспользуйтесь коммандой >> /addproduct");
+}
+
+private static async Task HandleAddProductCommand(ITelegramBotClient botClient, Message message)
+{
+	await botClient.SendTextMessageAsync(message.Chat.Id, "Введите название товара.");
+	workingUsers.Add(message.From.Id, (Activity.enterProductName, new Product()));
+}
+
+private static async Task HandleHelpCommand(ITelegramBotClient botClient, Message message)
+{
+	await botClient.SendTextMessageAsync(message.Chat.Id, "Помощь по работе с командами и ботом");
+}
+
+private static async Task HandleUnknownCommand(ITelegramBotClient botClient, Message message)
+{
+	await botClient.SendTextMessageAsync(message.Chat.Id, "Неизвестная команда");
+}
+</code></pre>
 						<br>
 					</p>
 					<p class="p">
@@ -322,52 +329,52 @@
 					<p class="p">
 						Заполнение полей <code class="code">productName</code> и <code class="code">productDescription</code>:
 					</p>
-					<code class="code">
-						if (workingUsers[message.From.Id].Item1 == Activity.enterProductName) <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;var tuple = workingUsers[message.From.Id]; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;Product tmpProduct = tuple.product; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;tmpProduct.ProductName = message.Text; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;workingUsers[message.From.Id] = (Activity.enterProductDescription, tmpProduct); <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;await botClient.SendTextMessageAsync(message.From.Id, "Теперь подробно опишите ваш товар.\n" + <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"\U0001f4bb Если это какое-то устройство, то подробно опишите все его технические характеристики\n" + <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"\U0001fa91 Если это мебель, то подробно опишите размер, цвет\n" + <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"\U0001f455 Если одежда, то опишите размеры\n" + <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"\U0001f4d5 Если книга, то опишите о чём она, кто автор\n" + <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"И так далее..."); <br>
-						} <br>
-						else if (workingUsers[message.From.Id].Item1 == Activity.enterProductDescription) <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;var tuple = workingUsers[message.From.Id]; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;Product tmpProduct = tuple.product; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;tmpProduct.DateTime = DateTime.Now; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;tmpProduct.ProductDescription = message.Text; <br>
-						… <br>
-					</code>
+<pre><code class="language-csharp">
+if (workingUsers[message.From.Id].Item1 == Activity.enterProductName)
+{
+	var tuple = workingUsers[message.From.Id];
+	Product tmpProduct = tuple.product;
+	tmpProduct.ProductName = message.Text;
+	workingUsers[message.From.Id] = (Activity.enterProductDescription, tmpProduct);
+	await botClient.SendTextMessageAsync(message.From.Id, "Теперь подробно опишите ваш товар.\n" +
+		"\U0001f4bb Если это какое-то устройство, то подробно опишите все его технические характеристики\n" +
+		"\U0001fa91 Если это мебель, то подробно опишите размер, цвет\n" +
+		"\U0001f455 Если одежда, то опишите размеры\n" +
+		"\U0001f4d5 Если книга, то опишите о чём она, кто автор\n" +
+		"И так далее...");
+}
+else if (workingUsers[message.From.Id].Item1 == Activity.enterProductDescription)
+{
+	var tuple = workingUsers[message.From.Id];
+	Product tmpProduct = tuple.product;
+	tmpProduct.DateTime = DateTime.Now;
+	tmpProduct.ProductDescription = message.Text;
+…
+</code></pre>
 					<p class="p">Сериализация класса <code class="code">tmpProduct</code> с помощью пакета <code class="code">using</code></p>
-					<code class="code">
-						System.Text.Json; <br>
-						… <br>
-						JsonSerializerOptions options = new JsonSerializerOptions <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All) <br>
-						}; <br>
-						string json = JsonSerializer.Serialize(tmpProduct, options); <br>
-						… <br>
-					</code>
+<pre><code class="language-csharp">
+System.Text.Json;
+…
+JsonSerializerOptions options = new JsonSerializerOptions
+{
+	Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All)
+};
+string json = JsonSerializer.Serialize(tmpProduct, options);
+…
+</code></pre>
 					<p class="p">Создание уникального QR-кода с помощью пакетов</p>
-					<code class="code">
-						using ZXing; using ZXing.QrCode; using ZXing.Windows.Compatibility; <br>
-						… <br>
-						BarcodeWriter&lt;Bitmap&gt; qrCode = new BarcodeWriter&lt;Bitmap&gt;
-						{ <br>
-							Format = BarcodeFormat.QR_CODE, <br>
-							Options = new QrCodeEncodingOptions { Height = 500, Width = 500, CharacterSet = "UTF-8" }, <br>
-							Renderer = new BitmapRenderer() <br>
-						}; <br>
-						qrCode.Write(json).Save(filePath, ImageFormat.Jpeg); <br>
-						… <br>
-					</code>
+<pre><code class="language-csharp">
+using ZXing; using ZXing.QrCode; using ZXing.Windows.Compatibility;
+…
+BarcodeWriter&lt;Bitmap&gt; qrCode = new BarcodeWriter&lt;Bitmap&gt;
+{
+	Format = BarcodeFormat.QR_CODE,
+	Options = new QrCodeEncodingOptions { Height = 500, Width = 500, CharacterSet = "UTF-8" },
+	Renderer = new BitmapRenderer()
+};
+qrCode.Write(json).Save(filePath, ImageFormat.Jpeg);
+…
+</code></pre>
 				</li>
 			</ol>
 			<h2 class="h2" id="desktop_user">4. Разработка десктоп-приложения для пользователей на C# с использованием WindowsForms</h2>
@@ -516,32 +523,32 @@
 					Механизм входа и регистрации пользователя
 					<p class="p">
 						Операции по подключению и выполнению команд, взаимодействующие с MySQL, выполнялись при помощи пакета <code class="code">using MySql.Data.MySqlClient;</code> <br>
-						<code class="code">
-							catch (Exception ex) <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;MessageBox.Show($"Не удалось выполнить подключение к базе данных.\n{ex.Message}"); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;return; <br>
-							} <br>
-							DataTable table = new DataTable(); <br>
-							<br>
-							MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @log AND `password` = @pass", db.getConnection()); <br>
-							command.Parameters.Add("@log", MySqlDbType.VarChar).Value = loginField.Text; <br>
-							command.Parameters.Add("@pass", MySqlDbType.VarChar).Value = password; <br>
-							<br>
-							MySqlDataAdapter adapter = new MySqlDataAdapter(); <br>
-							adapter.SelectCommand = command; <br>
-							adapter.Fill(table); <br>
-							<br>
-							if (table.Rows.Count > 0) <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;MainForm.userEmail = table.Rows[0].Field&lt;string&gt;(4); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;Hide(); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;MainForm mainForm = new MainForm(db); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;mainForm.Show(); <br>
-							} <br>
-							else <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;MessageBox.Show("Такого пользователя нет"); <br>
-						</code>
+<pre><code class="language-csharp">
+catch (Exception ex)
+{
+	MessageBox.Show($"Не удалось выполнить подключение к базе данных.\n{ex.Message}");
+	return;
+}
+DataTable table = new DataTable();
+
+MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @log AND `password` = @pass", db.getConnection());
+command.Parameters.Add("@log", MySqlDbType.VarChar).Value = loginField.Text;
+command.Parameters.Add("@pass", MySqlDbType.VarChar).Value = password;
+
+MySqlDataAdapter adapter = new MySqlDataAdapter();
+adapter.SelectCommand = command;
+adapter.Fill(table);
+
+if (table.Rows.Count > 0)
+{
+	MainForm.userEmail = table.Rows[0].Field&lt;string&gt;(4);
+	Hide();
+	MainForm mainForm = new MainForm(db);
+	mainForm.Show();
+}
+else
+	MessageBox.Show("Такого пользователя нет");
+</code></pre>
 						<br>
 					</p>
 				</li>
@@ -552,40 +559,38 @@
 					</p>
 					<p class="p">
 						Функция распознавания выполняется ежесекундно. Как только QR-код удалось распознать, информация об этом передаётся на главную форму, где начинается десериализация класса Product. <br>
-						<code class="code">
-							if (cameraBox.Image != null) <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;BarcodeReader barcodeReader = new BarcodeReader(); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;Result result = barcodeReader.Decode((Bitmap)cameraBox.Image); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;if (result != null) <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StopVideo(); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cameraBox.Image = null; <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cameraImageText.Visible = true; <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timer1.Stop(); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Product product = JsonSerializer.Deserialize&lt;Product&gt;(result.ToString()); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// MessageBox.Show(result.ToString()); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mainForm.JsonObject = result.ToString(); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hide(); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mainForm.startDeserialize(); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mainForm.Show(); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;} <br>
-							} <br>
-						</code>
+<pre><code class="language-csharp">
+if (cameraBox.Image != null)
+{
+	BarcodeReader barcodeReader = new BarcodeReader();
+	Result result = barcodeReader.Decode((Bitmap)cameraBox.Image);
+	if (result != null)
+	{
+		StopVideo();
+		cameraBox.Image = null;
+		cameraImageText.Visible = true;
+		timer1.Stop();
+		mainForm.JsonObject = result.ToString();
+		Hide();
+		mainForm.startDeserialize();
+		mainForm.Show();
+	}
+}
+</code></pre>
 						Функция десериализации класса Product выглядит следующим образом: <br>
-						<code class="code">
-							public void startDeserialize() <br>
-							{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;scannedProduct = null; <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;productNameTextBox.Text = string.Empty; <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;JsonSerializerOptions options = new JsonSerializerOptions <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PropertyNameCaseInsensitive = true <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;}; <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;scannedProduct = JsonSerializer.Deserialize&lt;Product&gt;(jsonObject, options); <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;productNameTextBox.Text = scannedProduct.ProductName; <br>
-							} <br>
-						</code>
+<pre><code class="language-csharp">
+public void startDeserialize()
+{
+	scannedProduct = null;
+	productNameTextBox.Text = string.Empty;
+	JsonSerializerOptions options = new JsonSerializerOptions
+	{
+		PropertyNameCaseInsensitive = true
+	};
+	scannedProduct = JsonSerializer.Deserialize&lt;Product&gt;(jsonObject, options);
+	productNameTextBox.Text = scannedProduct.ProductName;
+}
+</code></pre>
 						Где <code class="code">scannedProduct</code> это объект класса Product. <br>
 						<br>
 					</p>
@@ -598,43 +603,43 @@
 					<p class="p">
 						Если в пункте хранения товара был выбран склад, то регистрации товара в системе ставится значение 0, если товар будет храниться у продавца, то ставится 1. В колонку description записывается сериализованный в json объект. <br>
 					</p>
-					<code class="code">
-						MySqlCommand command = new MySqlCommand("INSERT INTO `products` (`login`, `product`, `description`, `storage`, `registered`) VALUES (@login, @product, @description, @storage, @reg);", db.getConnection()); <br>
-						command.Parameters.Add("@login", MySqlDbType.VarString).Value = shopName; <br>
-						command.Parameters.Add("@product", MySqlDbType.VarString).Value = scannedProducts.SelectedItem; <br>
-						<br>
-						scannedProductsList[scannedProducts.SelectedIndex].Seller = shopName; <br>
-						JsonSerializerOptions options = new JsonSerializerOptions <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All) <br>
-						}; <br>
-						string json = JsonSerializer.Serialize(scannedProductsList[scannedProducts.SelectedIndex], options); <br>
-						command.Parameters.Add("@description", MySqlDbType.VarString).Value = json; <br>
-						if (storageSelection.SelectedIndex == 0) <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;command.Parameters.Add("@reg", MySqlDbType.Binary).Value = 0; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;command.Parameters.Add("@storage", MySqlDbType.VarString).Value = warehouseAddress.Items[warehouseAddress.SelectedIndex]; <br>
-						} <br>
-						else <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;command.Parameters.Add("@reg", MySqlDbType.Binary).Value = 1; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;command.Parameters.Add("@storage", MySqlDbType.VarString).Value = "Дома"; <br>
-						} <br>
-						<br>
-						db.openConnection(); <br>
-						<br>
-						if (command.ExecuteNonQuery() == 1) <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;updateInformation(); <br>
-						} <br>
-						else <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;MessageBox.Show("Товар не удалось зарегистрировать. Какие-то проблемы"); <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;db.closeConnection(); <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;return; <br>
-						} <br>
-						db.closeConnection(); <br>
-					</code>
+<pre><code class="language-csharp">
+MySqlCommand command = new MySqlCommand("INSERT INTO `products` (`login`, `product`, `description`, `storage`, `registered`) VALUES (@login, @product, @description, @storage, @reg);", db.getConnection());
+command.Parameters.Add("@login", MySqlDbType.VarString).Value = shopName;
+command.Parameters.Add("@product", MySqlDbType.VarString).Value = scannedProducts.SelectedItem;
+
+scannedProductsList[scannedProducts.SelectedIndex].Seller = shopName;
+JsonSerializerOptions options = new JsonSerializerOptions
+{
+	Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All)
+};
+string json = JsonSerializer.Serialize(scannedProductsList[scannedProducts.SelectedIndex], options);
+command.Parameters.Add("@description", MySqlDbType.VarString).Value = json;
+if (storageSelection.SelectedIndex == 0)
+{
+	command.Parameters.Add("@reg", MySqlDbType.Binary).Value = 0;
+	command.Parameters.Add("@storage", MySqlDbType.VarString).Value = warehouseAddress.Items[warehouseAddress.SelectedIndex];
+}
+else
+{
+	command.Parameters.Add("@reg", MySqlDbType.Binary).Value = 1;
+	command.Parameters.Add("@storage", MySqlDbType.VarString).Value = "Дома";
+}
+
+db.openConnection();
+
+if (command.ExecuteNonQuery() == 1)
+{
+	updateInformation();
+}
+else
+{
+	MessageBox.Show("Товар не удалось зарегистрировать. Какие-то проблемы");
+	db.closeConnection();
+	return;
+}
+db.closeConnection();
+</code></pre>
 					<p class="p">
 						При выполнении функции <code class="code">updateInformation();</code> происходит полное обновление всей информации, подгружаемой с базы данных.
 					</p>
@@ -682,32 +687,33 @@
 					<p class="p">
 						Авторизация происходит по принципу авторизации пользователя в системе регистрации его товара. Сотрудник выбирает склад, вводит шифр для этого склада и эти данные сравниваются с теми, что лежат в базе данных. <br>
 					</p>
-					<code class="code">
-						try <br>
-						{ <br>
-							db = new DataBase(); <br>
-						} <br>
-						catch (Exception ex) <br>
-						{ <br>
-							MessageBox.Show($"Не удалось выполнить подключение к базе данных.\n{ex.Message}"); <br>
-							return; <br>
-						} <br>
-						table = new DataTable(); <br>
-						MySqlCommand command = new MySqlCommand("SELECT address, code FROM warehouses;", db.getConnection()); <br>
-						MySqlDataAdapter adapter = new MySqlDataAdapter(); <br>
-						adapter.SelectCommand = command; <br>
-						adapter.Fill(table); <br>
-						<br>
-						if (table.Rows[warehouseAddress.SelectedIndex].Field<int>(1) == int.Parse(codeWarehouseTextBox.Text)) <br>
-						{ <br>
-							Hide(); <br>
-							ScannerForm sf = new ScannerForm(db, table.Rows[warehouseAddress.SelectedIndex].Field<string>(0)); <br>
-							sf.Show(); <br>
-						} <br>
-						else <br>
-						{ <br>
-							MessageBox.Show("Неправильно введён шифр"); } <br>
-					</code>
+<pre><code class="language-csharp">
+try
+{
+	db = new DataBase();
+}
+catch (Exception ex)
+{
+	MessageBox.Show($"Не удалось выполнить подключение к базе данных.\n{ex.Message}");
+	return;
+} 
+table = new DataTable();
+MySqlCommand command = new MySqlCommand("SELECT address, code FROM warehouses;", db.getConnection());
+MySqlDataAdapter adapter = new MySqlDataAdapter();
+adapter.SelectCommand = command;
+adapter.Fill(table);
+
+if (table.Rows[warehouseAddress.SelectedIndex].Field&lt;int&gt;(1) == int.Parse(codeWarehouseTextBox.Text))
+{
+	Hide();
+	ScannerForm sf = new ScannerForm(db, table.Rows[warehouseAddress.SelectedIndex].Field&lt;string&gt;(0));
+	sf.Show();
+}
+else 
+{
+	MessageBox.Show("Неправильно введён шифр"); 
+}
+</code></pre>
 					<br>
 				</li>
 				<li style="font-style: oblique;">
@@ -716,70 +722,70 @@
 						Сканирование QR-кода происходит ровно по тому же принципу, что и сканирование QR-кода в десктоп-приложении пользователя. Проверка успешного сканирования происходит ежесекундно. В случае успешного сканирования проверяется совпадения складов (склад, указанный в товаре и склад, как место сканирования) и наличие такого товара. Если проверка успешно пройдена, то значение столбца registered меняется на 1.
 					</p>
 					<br>
-					<code class="code">
-						string json = result.ToString(); <br>
-						Product product = new Product(); <br>
-						JsonSerializerOptions options = new JsonSerializerOptions <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;PropertyNameCaseInsensitive = true <br>
-						}; <br>
-						product = JsonSerializer.Deserialize&lt;Product&gt;(json, options); <br>
-						<br>
-						DataTable table = new DataTable(); <br>
-						MySqlCommand command = new MySqlCommand("SELECT * FROM `products` WHERE `login` = @log AND `product` = @prodName AND `description` = @descr;", db.getConnection()); <br>
-						command.Parameters.Add("@log", MySqlDbType.VarChar).Value = product.Seller; <br>
-						command.Parameters.Add("@prodName", MySqlDbType.VarChar).Value = product.ProductName; <br>
-						command.Parameters.Add("@descr", MySqlDbType.VarChar).Value = json; <br>
-						MySqlDataAdapter adapter = new MySqlDataAdapter(); <br>
-						adapter.SelectCommand = command; <br>
-						adapter.Fill(table); <br>
-						if(table.Rows.Count > 0) <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;if (table.Rows[0].Field&lt;string&gt;(4) != warehouse) <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scannResultText.Text = "Не удалось"; <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scannResultText.ForeColor = Color.Red; <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command.Dispose(); <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return; <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;} <br>
-						} <br>
-						command.Dispose(); <br>
-						<br>
-						command = new MySqlCommand("UPDATE `products` SET `registered` = @reg WHERE `login` = @log AND `product` = @prodName AND `description` = @descr;", db.getConnection()); <br>
-						command.Parameters.Add("@reg", MySqlDbType.Int64).Value = 1; <br>
-						command.Parameters.Add("@log", MySqlDbType.VarChar).Value = product.Seller; <br>
-						command.Parameters.Add("@prodName", MySqlDbType.VarChar).Value = product.ProductName; <br>
-						command.Parameters.Add("@descr", MySqlDbType.VarChar).Value = json; <br>
-						db.openConnection(); <br>
-						<br>
-						int rowsAffected = command.ExecuteNonQuery(); <br>
-						<br>
-						if (rowsAffected > 0) <br>
-						{ <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;MySqlCommand checkCommand = new MySqlCommand("SELECT * FROM `products` WHERE `login` = @log AND `product` = @prodName AND `description` = @descr;", db.getConnection()); <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;checkCommand.Parameters.Add("@log", MySqlDbType.VarChar).Value = product.Seller; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;checkCommand.Parameters.Add("@prodName", MySqlDbType.VarChar).Value = product.ProductName; <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;checkCommand.Parameters.Add("@descr", MySqlDbType.VarChar).Value = json; <br>
-							<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;using (MySqlDataReader reader = checkCommand.ExecuteReader()) <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (reader.Read()) <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (reader.GetInt64("registered") == 1) <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scannResultText.Text = "Успешно"; <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scannResultText.ForeColor = Color.Green; <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scannResultText.Text = "Не удалось"; <br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scannResultText.ForeColor = Color.Red; <br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
-											&nbsp;&nbsp;&nbsp;&nbsp;} <br>
-						} <br>
-						db.closeConnection(); <br>
-					</code>
+<pre><code class="language-csharp">
+string json = result.ToString();
+Product product = new Product();
+JsonSerializerOptions options = new JsonSerializerOptions
+{
+	PropertyNameCaseInsensitive = true
+};
+product = JsonSerializer.Deserialize&lt;Product&gt;(json, options);
+
+DataTable table = new DataTable();
+MySqlCommand command = new MySqlCommand("SELECT * FROM `products` WHERE `login` = @log AND `product` = @prodName AND `description` = @descr;", db.getConnection());
+command.Parameters.Add("@log", MySqlDbType.VarChar).Value = product.Seller;
+command.Parameters.Add("@prodName", MySqlDbType.VarChar).Value = product.ProductName;
+command.Parameters.Add("@descr", MySqlDbType.VarChar).Value = json;
+MySqlDataAdapter adapter = new MySqlDataAdapter();
+adapter.SelectCommand = command;
+adapter.Fill(table);
+if(table.Rows.Count > 0)
+{
+	if (table.Rows[0].Field&lt;string&gt;(4) != warehouse)
+	{
+		scannResultText.Text = "Не удалось";
+		scannResultText.ForeColor = Color.Red;
+		command.Dispose();
+		return;
+	}
+}
+command.Dispose();
+
+command = new MySqlCommand("UPDATE `products` SET `registered` = @reg WHERE `login` = @log AND `product` = @prodName AND `description` = @descr;", db.getConnection());
+command.Parameters.Add("@reg", MySqlDbType.Int64).Value = 1;
+command.Parameters.Add("@log", MySqlDbType.VarChar).Value = product.Seller;
+command.Parameters.Add("@prodName", MySqlDbType.VarChar).Value = product.ProductName;
+command.Parameters.Add("@descr", MySqlDbType.VarChar).Value = json;
+db.openConnection();
+
+int rowsAffected = command.ExecuteNonQuery();
+
+if (rowsAffected > 0)
+{
+	MySqlCommand checkCommand = new MySqlCommand("SELECT * FROM `products` WHERE `login` = @log AND `product` = @prodName AND `description` = @descr;", db.getConnection());
+	checkCommand.Parameters.Add("@log", MySqlDbType.VarChar).Value = product.Seller;
+	checkCommand.Parameters.Add("@prodName", MySqlDbType.VarChar).Value = product.ProductName;
+	checkCommand.Parameters.Add("@descr", MySqlDbType.VarChar).Value = json;
+
+	using (MySqlDataReader reader = checkCommand.ExecuteReader())
+	{
+		if (reader.Read())
+		{
+			if (reader.GetInt64("registered") == 1)
+			{
+				scannResultText.Text = "Успешно";
+				scannResultText.ForeColor = Color.Green;
+			}
+				else
+			{
+			scannResultText.Text = "Не удалось";
+			scannResultText.ForeColor = Color.Red;
+			}
+		}
+	}
+}
+db.closeConnection();
+</code></pre>
 					<br>
 				</li>
 			</ol>
