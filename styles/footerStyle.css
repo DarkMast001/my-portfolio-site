@@ -24,17 +24,33 @@
 .footer_inner_links {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
+	align-items: center;
 }
 
-.footer_inner_links a {
+.link_container {
+	max-width: 130px;
+	padding: 10px;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	border-radius: 10px;
+}
+
+.link_container a {
 	all: unset;
 	font-size: 24px;
 	cursor: pointer;
+	text-align: center;
 }
 
 .footer_text {
-	width: 750px;
+	max-width: 750px;
+	width: 100%;
+	background-color: #fff;
+	padding: 10px;
+	border-radius: 10px;
+	box-sizing: border-box;
 }
 
 .footer_text span {
@@ -89,6 +105,7 @@
 	.footer_inner_links {
 		flex-direction: row;
 		justify-content: space-around;
+		align-items: center;
 	}
 
 	.footer_text {
@@ -100,5 +117,11 @@
 	.mail_icon {
 		width: 40px;
 		height: 40px;
+	}
+}
+
+@media (max-width: 400px) {
+	.link_container {
+		padding: 5px;
 	}
 }
