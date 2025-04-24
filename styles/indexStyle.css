@@ -407,7 +407,7 @@
 	width: 100%;
 }
 
-.item1, .item2, .item3, .item4, .item5, .item6, .item7 {
+.item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8 {
 	cursor: pointer;
 	border-radius: 20px;
 	padding: 20px 30px 30px 30px;
@@ -449,7 +449,12 @@
 }
 
 .item7 {
-    grid-column: 2 / 4;
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+}
+
+.item8 {
+	grid-column: 3 / 4;
     grid-row: 4 / 5;
 }
 
@@ -472,11 +477,11 @@
 }
 
 @media (hover: hover) {
-	.item1:hover, .item2:hover, .item3:hover, .item4:hover, .item5:hover, .item6:hover {
+	.item1:hover, .item2:hover, .item3:hover, .item4:hover, .item5:hover, .item6:hover, .item7:hover {
 		box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
 	}
 
-	.item1:hover .hover_overlay, .item2:hover .hover_overlay, .item3:hover .hover_overlay, .item4:hover .hover_overlay, .item5:hover .hover_overlay, .item6:hover .hover_overlay {
+	.item1:hover .hover_overlay, .item2:hover .hover_overlay, .item3:hover .hover_overlay, .item4:hover .hover_overlay, .item5:hover .hover_overlay, .item6:hover .hover_overlay, .item7:hover .hover_overlay {
 		opacity: 1;
 		transform: rotate(45deg) translate(75px, 0px);
 	}
@@ -563,6 +568,11 @@
 		grid-column: 1 / 2;
 		grid-row: 6 / 7;
 	}
+
+	.item8 {
+		grid-column: 2 / 3;
+		grid-row: 6 / 7;
+	}
 }
 
 @media (max-width: 1000px) {
@@ -591,7 +601,7 @@
 		display: none;
 	}
 
-	.item1, .item2, .item3, .item4, .item5, .item6, .item7 {
+	.item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8 {
 		gap: 20px;
 	}
 }

@@ -35,8 +35,12 @@ const typeTextAnimation = (text, typedTextElement, cursorElement) => {
                 setTimeout(type, 400);
             else if (index > 1 && index <= 4)
                 setTimeout(type, 200);
-            else
+            else if (index > 4 && index <= 7)
                 setTimeout(type, 400);
+            else if (index > 7 && index <= 9)
+                setTimeout(type, 200);
+            else
+                setTimeout(type, 300);
         } else {
             cursorElement.style.display = "none";
         }
